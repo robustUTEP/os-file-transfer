@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 # Echo client program
-import socket, sys, re
+import socket, sys, re, os
 sys.path.append("../lib")       # for params
 import params
 
@@ -53,16 +53,16 @@ if s is None:
 outMessage = "Hello world!".encode()
 while len(outMessage):
     print("sending '%s'" % outMessage.decode())
-    bytesSent = s.send(outMessage)
+    bytesSent = os.write(s.fileno(), outMessage)
     outMessage = outMessage[bytesSent:]
 
-data = s.recv(1024).decode()
+data = os.read(s.fileno(), 1024).decode()
 print("Received '%s'" % data)
 
-outMessage = "Hello world!"
+outMessage = "Hello world!".encode()
 while len(outMessage):
-    print("sending '%s'" % outMessage)
-    bytesSent = s.send(outMessage.encode())
+    print("sending '%s'" % outMessage.decode())
+    bytesSent = s.send(outMessage)
     outMessage = outMessage[bytesSent:]
 
 s.shutdown(socket.SHUT_WR)      # no more output
@@ -73,4 +73,5 @@ while 1:
     if len(data) == 0:
         break
 print("Zero length read.  Closing")
+
 s.close()
