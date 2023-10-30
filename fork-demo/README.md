@@ -4,9 +4,11 @@
 helloServer.py
 * listens on any:50001 for incoming TCP connection
 * when a client connects, it,
-** sends "hello"
-** then pauses 1/4s,
-** then sends "world"
+** forks off a child to communicate with client who
+*** sends "hello"
+*** then pauses 1/4s,
+*** then sends "world"
+
 
 helloClient.py
 * by default: connects to localhost:500001
