@@ -12,7 +12,6 @@ switchesVarDefaults = (
     )
 
 
-progname = "framedClient"
 paramMap = params.parseParams(switchesVarDefaults)
 
 server, usage  = paramMap["server"], paramMap["usage"]
