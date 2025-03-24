@@ -23,6 +23,7 @@ if paramMap['usage']:
     params.usage()
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+print(f"server listening at ip addr {listenAddr} port #{listenPort}")
 s.bind((listenAddr, listenPort))
 s.listen(1)              # allow only one outstanding request
 # s is a factory for connected sockets
