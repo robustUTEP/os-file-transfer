@@ -65,7 +65,7 @@ while len(outMessage):
     bytesSent = s.send(outMessage)
     outMessage = outMessage[bytesSent:]
 
-s.shutdown(socket.SHUT_WR)      # no more output
+s.shutdown(socket.SHUT_WR)      # alert connected socket that no more data will be sent
 
 while 1:
     data = s.recv(1024).decode()
