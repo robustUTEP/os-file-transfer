@@ -2,7 +2,7 @@
 
 # Echo server program
 
-import socket, sys, re
+import socket, sys, re, time
 sys.path.append("../lib")       # for params
 import params
 
@@ -40,6 +40,9 @@ while 1:
     while len(sendMsg):
         bytesSent = conn.send(sendMsg)
         sendMsg = sendMsg[bytesSent:0]
-conn.shutdown(socket.SHUT_WR)
+conn.shutdown(socket.SHUT_WR)   # indicate that the stream is complete
+print("socket shut down for writing, waiting 3s for socket to drain...")
+time.sleep(3)
+print("    ...closing socket")
 conn.close()
 
